@@ -144,7 +144,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Obstacle"))
         {
             //Game over
-
+            PersistentClass.setScore(score);
+            if (score > PersistentClass.getHighScore())
+            {
+                PersistentClass.setHighScore(score);
+            }
+            Application.LoadLevel(0);
         }
     }
 
