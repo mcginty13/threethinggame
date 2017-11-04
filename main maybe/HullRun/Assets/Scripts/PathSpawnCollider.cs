@@ -9,6 +9,11 @@ public class PathSpawnCollider : MonoBehaviour
     public Transform[] PathSpawnPoints;
     public GameObject Path;
     public GameObject DangerousBorder;
+    public Transform[] CollectibleSpawnPoints;
+    public GameObject[] Collectibles;
+    public int maxCollectibleForward;
+    public int maxCollectibleUp;
+    public int maxSpawnables;
 
     void OnTriggerEnter(Collider hit)
     {
@@ -33,6 +38,18 @@ public class PathSpawnCollider : MonoBehaviour
                 }
             }
 
+            for (int i = 0; i < maxSpawnables; i++)
+            {
+                int randomCollectibleSpawn = Random.Range(0, CollectibleSpawnPoints.Length);
+                int randomCollectible = Random.Range(0, Collectibles.Length);
+                int randomForward = Random.Range(0, maxCollectibleForward);
+                int randomUp = Random.Range(0, maxCollectibleUp);
+                float forward = CollectibleSpawnPoints[randomCollectibleSpawn].position.z + randomForward;
+                float up = CollectibleSpawnPoints[randomCollectibleSpawn].position.y + randomUp;
+                Vector3 finalSpawnPoint = new Vector3(CollectibleSpawnPoints[randomCollectibleSpawn].position.x, up, forward);
+                GameObject go = Instantiate(Collectibles[randomCollectible], finalSpawnPoint, CollectibleSpawnPoints[randomSpawnPoint].rotation);
+                go.SetActive(true);
+            }
         }
     }
 

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public int maxJumps;
     public Text scoreText;
-    public Text yText;
+    public float jumpMultiplier;
 
     private bool inAir = false;
     private int jumps;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         score = 0;
-        SetCountText();
+        SetScoreText();
 
         float x = -7.5f;
         for (var i = 0; i <= 6; i++)
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
             x += 2.5f;
             lane = 4;
         }
-        SetYText();
+        //SetYText();
 
         startTime = Time.time;
         //journeyDistance = Vector3.Distance(startPoint, endPoint);
@@ -46,25 +46,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpawnCollectibles();
-        var pos = transform.position;
-        float distanceCovered = (Time.time - startTime) * speed;
-        float fractionOfJourney = distanceCovered / journeyDistance;
-        pos.x = Vector3.Lerp(startPoint, endPoint, fractionOfJourney).x;
-        transform.position = pos;
+        if (Input.GetAxisRaw("Horizontal") == 0)
+        {
+            laneChanged = false;
+        }
+
+        score++;
+        SetScoreText();
     }
 
     //Called before physics updates
     void FixedUpdate()
     {
         //float moveX = Input.GetAxis("Horizontal");
-        float moveZ = 0.5f;
+        float moveZ = 0.5f * speed;
         //Vector3 movement = new Vector3(moveX, 0.0f, 0.0f);
 
 
         var pos = transform.position;
         pos.z += moveZ;
-        if (Input.GetAxis("Horizontal") < 0)
+        if (Input.GetAxisRaw("Horizontal") < 0)
         {
             if (!laneChanged)
             {
@@ -73,7 +74,9 @@ public class PlayerController : MonoBehaviour
                     startPoint = new Vector3(lanes[lane], transform.position.y, transform.position.z);
                     lane -= 1;
                     endPoint = new Vector3(lanes[lane], transform.position.y, transform.position.z);
-
+                    float distanceCovered = (Time.time - startTime) * speed;
+                    float fractionOfJourney = distanceCovered / journeyDistance;
+                    pos.x = Vector3.Lerp(startPoint, endPoint, fractionOfJourney).x;
 
                     //pos.x = lanes[lane];
 
@@ -81,7 +84,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetAxisRaw("Horizontal") > 0)
         {
             if (!laneChanged)
             {
@@ -90,34 +93,34 @@ public class PlayerController : MonoBehaviour
                     startPoint = new Vector3(lanes[lane], transform.position.y, transform.position.z);
                     lane++;
                     endPoint = new Vector3(lanes[lane], transform.position.y, transform.position.z);
-                    
+                    float distanceCovered = (Time.time - startTime) * speed;
+                    float fractionOfJourney = distanceCovered / journeyDistance;
+                    pos.x = Vector3.Lerp(startPoint, endPoint, fractionOfJourney).x;
                     //pos.x = lanes[lane];
 
                     laneChanged = true;
                 }
             }
         }
-        if (Input.GetAxis("Horizontal") == 0)
-        {
-            laneChanged = false;
-        }
+        transform.position = pos;
         //transform.position = pos;
         //rb.AddForce(movement * speed);
 
+        //Jumping
         if (Input.GetButtonDown("Jump") && (inAir == false || jumps < maxJumps))
         {
             float jump = 15.0f;
             Vector3 jumpMovement = new Vector3(0.0f, jump, 0.0f);
-            rb.AddForce(jumpMovement * speed);
+            rb.AddForce(jumpMovement * jumpMultiplier);
+            //SetYText(jumpMovement * speed);
             jumps++;
             inAir = true;
         }
-        if (inAir == true && rb.velocity.y < 1)
-        {
-            inAir = false;
-            jumps = 0;
-        }
-        SetYText();
+        //if (inAir == true && rb.velocity.y < 1)
+        //{
+        //    inAir = false;
+        //    jumps = 0;
+        //}
     }
 
     //Runs when object collides with a trigger collider
@@ -127,28 +130,25 @@ public class PlayerController : MonoBehaviour
         {
             //Destroy(other.gameObject);
             other.gameObject.SetActive(false);
-            score++;
-            SetCountText();
+            score+= 100;
+            SetScoreText();
         }
     }
 
-    void SetCountText()
+    //Runs when object collides with another collider
+    void OnCollisionEnter(Collision collision)
+    {
+        foreach(ContactPoint contact in collision.contacts)
+        {
+            if (contact.otherCollider.CompareTag("Ground"))
+            {
+                inAir = false;
+            }
+        }
+    }
+
+    void SetScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
-    }
-    void SetYText()
-    {
-        yText.text = lanes[4].ToString();
-    }
-
-    void SpawnCollectibles()
-    {
-        //Random rand = new Random();
-        //float randX = rand.Next(1, 10);
-        //float randZ = rand.Next(1, 10);
-
-        //Vector3 position = new Vector3(randX, 1.0f, randZ);
-        //Quaternion rotation = Quaternion.identity;
-        //GameObject collectible = (GameObject)Instantiate(Resources.Load("Chip Spice"), position, rotation);
     }
 }
