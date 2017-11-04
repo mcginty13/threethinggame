@@ -24,7 +24,6 @@ public class MainMenu : MonoBehaviour {
         if(isStart)
         {
             Application.LoadLevel(1);
-            Thread.Sleep(500);
             GetComponent<TextMesh>().text = "Start Game";
         }
         if(isQuit)
@@ -32,5 +31,6 @@ public class MainMenu : MonoBehaviour {
             Application.Quit();
         }
     }
+    
 
 }

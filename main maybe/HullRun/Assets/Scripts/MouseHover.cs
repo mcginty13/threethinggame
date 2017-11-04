@@ -33,7 +33,7 @@ public class MouseHover : MonoBehaviour {
     {
         if(isStart)
         {
-            GetComponent<TextMesh>().text = "Replace with loading level";
+            GetComponent<TextMesh>().text = "Loading..";
         }
         if (isQuit)
         {

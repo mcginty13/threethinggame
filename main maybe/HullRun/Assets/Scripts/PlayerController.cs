@@ -115,6 +115,8 @@ public class PlayerController : MonoBehaviour
             //SetYText(jumpMovement * speed);
             jumps++;
             inAir = true;
+            var audio = GetComponent<AudioSource>();
+            audio.Play();
         }
         //if (inAir == true && rb.velocity.y < 1)
         //{
@@ -138,8 +140,6 @@ public class PlayerController : MonoBehaviour
             {
                 score += 100;
             }
-
-            SetScoreText();
         }
         if (other.gameObject.CompareTag("Obstacle"))
         {

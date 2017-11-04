@@ -7,7 +7,7 @@ public class updateMainMenuScore : MonoBehaviour {
     public Text text;
 	// Use this for initialization
 	void Start () {
-		
+        SetText();
 	}
 	
 	// Update is called once per frame
@@ -17,6 +17,6 @@ public class updateMainMenuScore : MonoBehaviour {
     void SetText()
     {
         text.text = "Last Score: " + PersistentClass.getScore().ToString() + " " +
-            "High Score: " + PersistentClass.getHighScore().ToString();
+            "\nHigh Score: " + PersistentClass.getHighScore().ToString();
     }
 }
