@@ -136,6 +136,14 @@ public class PlayerController : MonoBehaviour
             {
                 score += 250;
             }
+            else if(other.gameObject.name == "Chip Spice Bottle")
+            {
+                score += 500;
+            }
+            else if(other.gameObject.name == "Chips")
+            {
+                score += 750;
+            }
             else
             {
                 score += 100;

@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\GameManager.cs" />
-     <Compile Include="Assets\quickStart.cs" />
      <Compile Include="Assets\Scripts\assignmaterial.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Continue.cs" />
@@ -64,11 +63,12 @@
      <Compile Include="Assets\Scripts\Pause.cs" />
      <Compile Include="Assets\Scripts\PersistentClass.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\quickStart.cs" />
      <Compile Include="Assets\Scripts\QuitButton.cs" />
      <Compile Include="Assets\Scripts\StartButton.cs" />
      <Compile Include="Assets\Scripts\TimeDestroyer.cs" />
+     <Compile Include="Assets\Scripts\updateMainMenuScore.cs" />
      <Compile Include="Assets\Scripts\updateText.cs" />
-     <Compile Include="Assets\updateMainMenuScore.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

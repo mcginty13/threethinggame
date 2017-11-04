@@ -52,7 +52,15 @@ public class PathSpawnCollider : MonoBehaviour
                 go.SetActive(true);
                 if(randomCollectible == 1)
                 {
+                    go.name = "Chip Spice Bottle";
+                }
+                if(randomCollectible == 2)
+                {
                     go.name = "Chip Spice";
+                }
+                if(randomCollectible == 3)
+                {
+                    go.name = "Chips";
                 }
             }
             for (int i = 0; i < maxObstacles; i++)
