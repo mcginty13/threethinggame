@@ -56,7 +56,6 @@
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\Hover.cs" />
-     <Compile Include="Assets\Scripts\move.cs" />
      <Compile Include="Assets\Scripts\PathSpawnCollider.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\QuitButton.cs" />
