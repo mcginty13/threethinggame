@@ -130,15 +130,28 @@ public class PlayerController : MonoBehaviour
         {
             //Destroy(other.gameObject);
             other.gameObject.SetActive(false);
-            score+= 100;
+            if (other.gameObject.name == "Chip Spice")
+            {
+                score += 250;
+            }
+            else
+            {
+                score += 100;
+            }
+
             SetScoreText();
+        }
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            //Game over
+
         }
     }
 
     //Runs when object collides with another collider
     void OnCollisionEnter(Collision collision)
     {
-        foreach(ContactPoint contact in collision.contacts)
+        foreach (ContactPoint contact in collision.contacts)
         {
             if (contact.otherCollider.CompareTag("Ground"))
             {
