@@ -57,6 +57,8 @@
      <Compile Include="Assets\Scripts\Continue.cs" />
      <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\Hover.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\MouseHover.cs" />
      <Compile Include="Assets\Scripts\PathSpawnCollider.cs" />
      <Compile Include="Assets\Scripts\Pause.cs" />
      <Compile Include="Assets\Scripts\PersistentClass.cs" />
@@ -64,7 +66,8 @@
      <Compile Include="Assets\Scripts\QuitButton.cs" />
      <Compile Include="Assets\Scripts\StartButton.cs" />
      <Compile Include="Assets\Scripts\TimeDestroyer.cs" />
-     <Compile Include="Assets\updateText.cs" />
+     <Compile Include="Assets\Scripts\updateText.cs" />
+     <Compile Include="Assets\updateMainMenuScore.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

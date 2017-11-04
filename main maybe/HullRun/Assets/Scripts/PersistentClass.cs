@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PersistentClass {
+public static class PersistentClass {
 
     private static int score = 0; //The most recent score
     private static int highScore = 0; //The highest score
